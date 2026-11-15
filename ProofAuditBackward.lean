@@ -5,3 +5,6 @@ import CommonTime.Targets
 
 #print axioms CommonTime.backward_minor_aux
 #print axioms CommonTime.backward_time_state_minor_positive
+#print axioms CommonTime.backward_minor_general
+#print axioms CommonTime.backward_minor_aux_full
+#print axioms CommonTime.backward_time_state_minor_full
