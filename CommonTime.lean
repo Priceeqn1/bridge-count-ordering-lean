@@ -3,6 +3,7 @@ import CommonTime.Definitions
 import CommonTime.BackwardMinor
 import CommonTime.Crossing
 import CommonTime.Prefix
+import CommonTime.LogConcavity
 import CommonTime.Targets
 
 /-!

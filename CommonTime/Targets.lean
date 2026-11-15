@@ -3,6 +3,7 @@ import CommonTime.Algebra
 import CommonTime.BackwardMinor
 import CommonTime.Crossing
 import CommonTime.Prefix
+import CommonTime.LogConcavity
 
 /-!
 # Formalization targets for Version 1.5
@@ -107,6 +108,6 @@ theorem jump_count_logconcavity
     (hsum : a + b = c + d) :
     CoeffNonneg (jumpCountWeight k a K * jumpCountWeight k b K -
       jumpCountWeight k c K * jumpCountWeight k d K) := by
-  sorry
+  exact jump_count_logconcavity_aux htri hpos hK a b c d hchain.2.1 hchain.2.2.1 hsum
 
 end CommonTime
