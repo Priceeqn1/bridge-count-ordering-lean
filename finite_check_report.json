@@ -1,0 +1,478 @@
+{
+  "total_cases": 40,
+  "tested_minors": 42790,
+  "theorem_matching_failures": 0,
+  "deliberate_negative_control_failures": 40,
+  "results": [
+    {
+      "k": 4,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 108,
+      "negative_minors": 1,
+      "first_failure": {
+        "q": 3,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 1,
+        "sample_coeff": -98
+      }
+    },
+    {
+      "k": 4,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 4,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 108,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 400,
+      "negative_minors": 3,
+      "first_failure": {
+        "q": 3,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 1,
+        "sample_coeff": -98
+      }
+    },
+    {
+      "k": 5,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 400,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 5,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 400,
+      "negative_minors": 1,
+      "first_failure": {
+        "q": 4,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 1,
+        "sample_coeff": -98
+      }
+    },
+    {
+      "k": 6,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 1125,
+      "negative_minors": 7,
+      "first_failure": {
+        "q": 3,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 1,
+        "sample_coeff": -98
+      }
+    },
+    {
+      "k": 6,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 1125,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 6,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 1125,
+      "negative_minors": 4,
+      "first_failure": {
+        "q": 4,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 2,
+        "sample_coeff": -98
+      }
+    },
+    {
+      "k": 7,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Pascal",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Power",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Flat",
+      "full_tp2": true,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Positive-column-only",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 2646,
+      "negative_minors": 14,
+      "first_failure": {
+        "q": 3,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 1,
+        "sample_coeff": -98
+      }
+    },
+    {
+      "k": 7,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "prefix",
+      "tested_minors": 2646,
+      "negative_minors": 0,
+      "first_failure": null
+    },
+    {
+      "k": 7,
+      "kernel": "Ktheta100",
+      "full_tp2": false,
+      "positive_column_tp2": true,
+      "interval": "suffix",
+      "tested_minors": 2646,
+      "negative_minors": 10,
+      "first_failure": {
+        "q": 4,
+        "indices": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "negative_count": 3,
+        "sample_coeff": -98
+      }
+    }
+  ]
+}
