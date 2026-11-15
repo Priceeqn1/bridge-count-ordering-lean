@@ -1,8 +1,8 @@
-# Bridge-count ordering in Lean 4 — formalization project (NOT YET CERTIFIED)
+# Bridge-count ordering in Lean 4 — partial formal certification
 
 Goal: a Lean-checked proof of the new common-time theorem in Hardisty, *Jump-count ordering beyond total positivity in weighted increasing paths*, AAM working draft v1.5 (14 November 2026).
 
-**Current status:** specification + proof-target scaffold; the elementary two-term algebraic identity is written with `ring`; six lemma/theorem targets are explicitly marked `sorry`. **No Lean certificate exists yet.** The current working environment has no `lean`/`lake` binary and cannot reach external installers; thus even the syntax has not been compiled here. Do not cite this project as a completed Lean formalization in the paper.
+**Current status (15 November 2026): ONE THEOREM CERTIFIED, FIVE TARGETS OPEN.** The full positive-column backward time–state minor theorem `CommonTime.backward_time_state_minor_positive` now has a complete Lean 4 proof (the Fable-derived auxiliary proof is in `CommonTime/BackwardMinor.lean`). The pinned mathlib build passed, and `#print axioms` reports exactly `[propext, Classical.choice, Quot.sound]` for this theorem, with **no `sorryAx`**. See [successful build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43676293326). Five further theorems remain `sorry`; the **main count-array theorem is not yet certified**. The project-wide proof-gap job intentionally remains red until those obligations are proved.
 
 ## Why this encoding
 
@@ -17,7 +17,7 @@ Goal: a Lean-checked proof of the new common-time theorem in Hardisty, *Jump-cou
 2. Unpack and open this folder in VS Code with Lean 4 extension.
 3. Run `lake update && lake exe cache get && lake build`.
 4. Run `python3 scripts/check_no_gaps.py` (EXPECTED TO FAIL until targets are proved).
-5. After all targets are proved, run `lake env lean ProofAudit.lean` to print every theorem’s axiom dependencies. Confirm absence of `sorryAx` and unexpected axioms.
+5. Run `lake env lean ProofAuditBackward.lean` to reproduce the certified lemma audit. After all targets are proved, run `lake env lean ProofAudit.lean` to print every theorem’s axiom dependencies. Confirm absence of `sorryAx` and unexpected axioms.
 6. Compare theorem signatures against `FORMALIZATION_MAP.md` and the manuscript. A Lean certificate only proves exactly what Lean has been asked to prove.
 
 For an intermediate check independent of Lean: `python3 scripts/independent_poly_checks.py`. This tests a finite set of kernels by exact monomial coefficient arithmetic; it is NOT a substitute for formal verification.
@@ -28,7 +28,8 @@ For an intermediate check independent of Lean: `python3 scripts/independent_poly
 
 - Proposed algebraic core: `CommonTime/Algebra.lean` (`ring` proof; not typechecked here).
 - Formal path and count array specification: `CommonTime/Definitions.lean` (not typechecked here).
-- Two signed common-time lemmas plus core prefix theorem, suffix theorem, log-concavity: `CommonTime/Targets.lean` (explicit `sorry`, **unproved**).
+- **Proved:** positive-column backward time–state minor: `CommonTime/BackwardMinor.lean` and `CommonTime/Targets.lean` (no `sorry` in this theorem; axiom-audited).
+- **Still open:** full-column backward minor, crossing-time minor, prefix-count theorem, suffix-count theorem, and log-concavity: `CommonTime/Targets.lean` (five explicit `sorry` placeholders).
 - The two h variants and E lemma are explicit targets; proof bodies remain open.
 
-GitHub Actions workflow reports incomplete certificates as failures intentionally. No false-green certification.
+GitHub Actions has a passing **Lean build + focused backward-minor axiom audit**, but a failing **whole-project completion** job because five other proofs are unfinished. This is intentional; a green build alone does not certify all manuscript claims.
