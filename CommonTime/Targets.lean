@@ -7,9 +7,10 @@ import CommonTime.Prefix
 /-!
 # Formalization targets for Version 1.5
 
-IMPORTANT: BOTH backward minor theorems are now proved and Lean kernel-checked.
-Four subsequent `sorry` placeholders mark UNPROVED targets.
-The main count-array theorem is NOT yet certified.
+IMPORTANT: the two backward minor theorems, the crossing-time minor theorem,
+and the prefix-count TP2 theorem are now proved and Lean kernel-checked.
+Two subsequent `sorry` placeholders mark UNPROVED targets.
+The full two-sided count-array theorem is NOT yet certified.
 The repository's `certificate` CI job intentionally rejects these.
 
 Target order:
