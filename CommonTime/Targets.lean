@@ -5,8 +5,9 @@ import CommonTime.BackwardMinor
 /-!
 # Formalization targets for Version 1.5
 
-IMPORTANT: the `sorry` placeholders below mark UNPROVED targets.
-This is a mathematically faithful statement scaffold, NOT a certificate.
+IMPORTANT: the positive-column backward minor is now proved and Lean kernel-checked.
+Five subsequent `sorry` placeholders mark UNPROVED targets.
+The main count-array theorem is NOT yet certified.
 The repository's `certificate` CI job intentionally rejects these.
 
 Target order:
