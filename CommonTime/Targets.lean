@@ -2,6 +2,7 @@ import CommonTime.Definitions
 import CommonTime.Algebra
 import CommonTime.BackwardMinor
 import CommonTime.Crossing
+import CommonTime.Prefix
 
 /-!
 # Formalization targets for Version 1.5
@@ -78,7 +79,8 @@ theorem prefix_count_array_TP2
     CoeffNonneg (minor
       (prefixArray k q r s K) (prefixArray k q r s' K)
       (prefixArray k q r' s K) (prefixArray k q r' s' K)) := by
-  sorry
+  unfold minor
+  exact prefix_count_aux htri hpos hK q hqk r r' s s' hr hs
 
 /-- Two-sided theorem: suffix arrays under full kernel TP2. -/
 theorem suffix_count_array_TP2
