@@ -24,7 +24,7 @@ abbrev Path (k m : ℕ) := Fin (m + 1) → Vertex k
 
 def CoeffNonneg {k : ℕ} (p : Poly k) : Prop :=
   ∀ exponents : (Fin (k + 1) →₀ ℕ),
-    0 ≤ MvPolynomial.coeff exponents p
+    0 ≤ p.coeff exponents
 
 def CoeffLe {k : ℕ} (p q : Poly k) : Prop :=
   CoeffNonneg (q - p)
@@ -125,7 +125,7 @@ noncomputable def jumpCountWeight (k m : ℕ)
   classical
   exact ∑ p ∈ paths k m, pathWeight k m K p
 
-def minor {k : ℕ} (a b c d : Poly k) : Poly k :=
+noncomputable def minor {k : ℕ} (a b c d : Poly k) : Poly k :=
   a * d - b * c
 
 end CommonTime
