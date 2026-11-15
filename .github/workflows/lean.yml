@@ -1,4 +1,4 @@
-name: Lean proof validation (fails until proofs are complete)
+name: Lean proof validation and axiom audit
 
 on:
   push:

@@ -8,7 +8,8 @@ import CommonTime.Suffix
 import CommonTime.Targets
 
 /-!
-  Main import module. This is an *unfinished* formalization project.
-  A Lean build alone is NOT evidence that theorem targets were proved.
-  Run scripts/check_no_gaps.py and inspect `#print axioms`.
+  Main import module for six kernel-checked theorem targets.
+  Both the full Lean build and the separate proof-gap CI job passed.
+  Run scripts/check_no_gaps.py and inspect the output of ProofAudit.lean.
+  Manuscript-to-Lean statement equivalence remains to be independently audited.
 -/

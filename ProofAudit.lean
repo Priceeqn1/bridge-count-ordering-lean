@@ -4,10 +4,10 @@ import CommonTime
   Kernel dependency audit. Run with:
       lake env lean ProofAudit.lean
 
-  All six theorem targets have proof bodies. The expected axiom audit
-  should have no `sorryAx`. Full repository certificate is pending.
-  Once proved, the expected remaining axioms are the Lean/mathlib foundations
-  (typically `propext`, `Classical.choice`, and `Quot.sound`).
+  All six theorem targets are Lean kernel-checked. A completed project-wide
+  CI run confirms the absence of `sorryAx` in all six reports.
+  Their dependencies are the standard Lean/mathlib foundations:
+  `propext`, `Classical.choice`, and `Quot.sound`.
 -/
 
 #print axioms CommonTime.cauchy_binet_two_terms

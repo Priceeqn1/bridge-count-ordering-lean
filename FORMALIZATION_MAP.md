@@ -20,17 +20,17 @@ Source: `Jump_Count_Ordering_AAM_v1_5_Overleaf.zip`, `main.tex`, Section 3, the 
 | Theorem 3.10, two-sided full-TP₂ clause | `suffix_count_array_TP2` | Uses full TP₂, not positive columns |
 | Corollary 3.11 log-concavity | `jump_count_logconcavity` | Coefficientwise, arbitrary k, a+b=c+d |
 
-**Do not mark the project certified** until all three targets, all intermediary lemmas, and `#print axioms` checks pass. No `sorry`, custom `axiom`, `admit`, or weakened extra hypotheses are permitted.
+**Kernel certification complete (15 November 2026):** all six formal targets and their supporting lemmas compiled under the pinned Lean 4/mathlib environment. The repository-wide proof-gap check passed, and `ProofAudit.lean` reported only `propext`, `Classical.choice`, and `Quot.sound` for every target. [Successful certification run](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43680554382). Independent comparison of these exact statements with the manuscript remains an outstanding scholarly audit.
 
-## Intended formal proof architecture
+## Realized formal proof architecture
 
-1. Develop coefficientwise preorder (`CoeffLe`) and prove addition/multiplication closure. This requires coefficient convolution in `MvPolynomial`.
+1. Establish `CoeffNonneg` closure under finite sums, products, and the coefficient convolution of `MvPolynomial`.
 2. Establish finite 2x2 Cauchy–Binet for polynomial-valued matrices.
 3. Define strictly lower triangular matrix powers `T^m` and prove they agree with `pathWeight` sums.
 4. Define `h_t(z)` and `E^theta_rho(z)` with exact crossing-time semantics.
 5. Prove their ordered minors coefficientwise nonpositive, with the positive-column restriction for z,z'≥1.
 6. Split all four path sums at a common jump index to prove every prefix count-array minor nonnegative.
-7. Reflect paths and apply full kernel TP₂ to obtain suffix minors.
+7. Prove suffix minors directly from full kernel TP₂, using forward-weight minors, suffix-core/suffix-tail decomposition, and a common-time split counted backward from the path endpoint (no state-space reflection).
 8. Derive jump-count log-concavity via the time/state lemma.
 
 ## Issues to check while formalizing

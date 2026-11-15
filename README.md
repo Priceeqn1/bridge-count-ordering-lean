@@ -1,40 +1,42 @@
-# Bridge-count ordering in Lean 4 — partial formal certification
+# Bridge-count ordering — Lean 4 formal certificate
 
-Lean 4 formalization companion to Hardisty, *Jump-count ordering beyond total positivity in weighted increasing paths* (AAM working draft v1.5, 14 November 2026).
+Formal verification companion to Hardisty, *Jump-count ordering beyond total positivity in weighted increasing paths* (AAM working draft v1.5, 14 November 2026).
 
-**Status (15 November 2026): FIVE OF SIX TARGETS CERTIFIED; ONE STILL OPEN.** Lean 4 / mathlib 4.35.0 has kernel-checked both backward time–state minor theorems, the crossing-time minor theorem, the principal prefix count-array theorem, and jump-count log-concavity. Each completed target's `#print axioms` output contains only `[propext, Classical.choice, Quot.sound]`, **no `sorryAx`**. Only the suffix count-array theorem still has an explicit `sorry` placeholder. **The full two-sided manuscript theorem is NOT yet Lean-certified; the prefix half is.**
+**Status (15 November 2026): ALL SIX THEOREM TARGETS KERNEL-CHECKED.** The project's pinned Lean 4 / mathlib v4.35.0 build passed, as did its separate proof-gap and unapproved-axiom detection job. The independent `#print axioms` report for all six targets contains only `[propext, Classical.choice, Quot.sound]` and **no `sorryAx`**.
 
-**Verification evidence:**
-- [Successful backward-minor build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43677296331)
-- [Successful crossing-time build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43677795777)
-- [Successful prefix-count theorem build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43678802965)
-- [Successful jump-count log-concavity build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43679935051)
-- `ProofAuditBackward.lean`, `ProofAuditCrossing.lean`, `ProofAuditPrefix.lean`, and `ProofAuditLogConcavity.lean` are independently runnable audit entrypoints.
-- GitHub Actions' **Build the Lean project** job passes for the proven lemmas; its separate **Reject proof gaps and unapproved axioms** job intentionally fails because the suffix theorem remains unfinished. A project-wide green certificate does not yet exist.
+- [Complete successful GitHub Actions workflow, including all six audits](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43680554382)
+- Both backward time–state minor theorems: positive-column TP₂ and full TP₂.
+- The crossing-time minor theorem (including boundary cut `q = 0`, with `q < z`).
+- The entire coefficientwise TP₂ **prefix-count array** under positive-column kernel TP₂.
+- The entire coefficientwise TP₂ **suffix-count array** under full kernel TP₂.
+- Coefficientwise jump-count log-concavity under full kernel TP₂.
 
-## Scope of the formalization
+**Scope caution:** These are formal certificates for the precise statements in `CommonTime/Targets.lean`. An independent theorem-by-theorem **manuscript-to-Lean fidelity audit** is still needed before asserting that every detail of the published manuscript is formally verified.
 
-- `MvPolynomial (Fin (k+1)) ℝ` represents the independent activity variables and exact coefficientwise positivity, not numerical substitution.
-- Paths are finite strictly increasing vertex sequences, starting at 0 and ending at an arbitrary finite endpoint.
-- Full and positive-column TP₂ hypotheses are separate. The prefix theorem puts no TP₂ restriction on column zero.
-- The kernel-checked crossing-time lemma holds also for the boundary cut `q = 0`; it needs only `q < z.val` and has no `q ≥ 1` hypothesis. For the manuscript's internal cuts `1 ≤ q < k`, this is the same result with a slightly stronger Lean statement.
-- All completed results quantify over arbitrary finite endpoints rather than testing a fixed `k`.
+## Mathematics and representation
 
-## Main project files
+- Vertices are `Fin (k+1)`, with arbitrary finite endpoint `k`; admissible paths start at 0 and end at `k`, taking strictly increasing jumps.
+- `MvPolynomial (Fin (k+1)) ℝ` encodes independent site activities; `CoeffNonneg` quantifies over every monomial rather than sampling numerical activities.
+- `FullTP2` covers all ordered kernel minors, including column 0. `PositiveColumnTP2` omits determinants involving column 0, while retaining positive admissible edge weights.
+- The prefix result counts intermediate vertices in `[1,q]`. The suffix result counts intermediate vertices in `[q,k-1]`, including `q`; its crossing argument is at `q-1`.
+- The suffix proof uses direct forward weights and suffix-tail transport, not a state-space reflection.
 
-- `CommonTime/Definitions.lean`: path, activity polynomial, kernel and count-array definitions
-- `CommonTime/Algebra.lean`: elementary Cauchy–Binet algebra
-- `CommonTime/BackwardMinor.lean`: complete generalized backward time/state minor proof
-- `CommonTime/Crossing.lean`: complete crossing-time minor proof, last-jump recursions, and coefficientwise transport lemma
-- `CommonTime/Prefix.lean`: complete common-time splitting proof of the principal prefix-count TP₂ theorem
-- `CommonTime/LogConcavity.lean`: complete coefficientwise jump-count log-concavity proof under full TP₂
-- `CommonTime/Targets.lean`: the six precise theorem targets (five proved, one open)
-- `ProofAuditBackward.lean`, `ProofAuditCrossing.lean`, `ProofAuditPrefix.lean`, `ProofAuditLogConcavity.lean`: axiom reports for the certified theorems
-- `scripts/independent_poly_checks.py`: exact finite-endpoint checks (supporting evidence, not a proof)
+## Files
 
-## Reproduce
+- `CommonTime/Definitions.lean`: model and polynomial definitions.
+- `CommonTime/Algebra.lean`: elementary algebra.
+- `CommonTime/BackwardMinor.lean`: backward time–state inequalities.
+- `CommonTime/Crossing.lean`: first-crossing minors.
+- `CommonTime/Prefix.lean`: common-time prefix count-array proof.
+- `CommonTime/LogConcavity.lean`: jump-count log-concavity proof.
+- `CommonTime/Suffix.lean`: direct suffix count-array proof.
+- `CommonTime/Targets.lean`: six certified theorem declarations.
+- `ProofAudit*.lean`: focused and combined kernel-axiom reports.
+- `FORMALIZATION_MAP.md`: mathematical statement correspondence and remaining fidelity-review questions.
 
-Install Lean 4 via `elan` (<https://lean-lang.org/install/manual/>), then run:
+## Reproduce the certification
+
+Install Lean via `elan` (<https://lean-lang.org/install/manual/>), and then run:
 
 ```bash
 lake update
@@ -44,10 +46,11 @@ lake env lean ProofAuditBackward.lean
 lake env lean ProofAuditCrossing.lean
 lake env lean ProofAuditPrefix.lean
 lake env lean ProofAuditLogConcavity.lean
-python3 scripts/independent_poly_checks.py
-python3 scripts/check_no_gaps.py  # EXPECTED TO FAIL until all remaining targets are proved
+lake env lean ProofAuditSuffix.lean
+lake env lean ProofAudit.lean
+python3 scripts/check_no_gaps.py
 ```
 
-When all six targets are completed, run `lake env lean ProofAudit.lean` and confirm the absence of `sorryAx`, `admit`, unproved custom axioms, and weakened hypotheses. A formal certificate proves the *formal statement*; the equivalence with the manuscript's theorems must also be reviewed independently.
+Optional independent finite tests: `python3 scripts/independent_poly_checks.py`. These are not a substitute for the proofs.
 
-The work derives from AI-assisted mathematical exploration. Lean's ordinary kernel, not an AI model's assertion, is the authority for the five currently certified targets.
+The Lean kernel, not an AI model's stated confidence, is the final authority on the six formal declarations. The proof was developed with AI assistance and checked reproducibly under ordinary Lean 4/mathlib.
