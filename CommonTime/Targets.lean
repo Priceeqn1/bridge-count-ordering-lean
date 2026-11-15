@@ -1,6 +1,7 @@
 import CommonTime.Definitions
 import CommonTime.Algebra
 import CommonTime.BackwardMinor
+import CommonTime.Crossing
 
 /-!
 # Formalization targets for Version 1.5
@@ -63,7 +64,7 @@ theorem crossing_time_minor
     CoeffNonneg
       (crossingWeight k theta q rho K z' * crossingWeight k theta q rho' K z -
        crossingWeight k theta q rho K z * crossingWeight k theta q rho' K z') := by
-  sorry
+  exact crossing_minor_aux htri hpos hK q theta rho rho' hrr' hr't z z' hqz hzz'
 
 /-- Full prefix count-array property (the stronger part of Theorem 3.10).
     The column-zero entries of `K` are only assumed positive on their

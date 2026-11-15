@@ -23,6 +23,7 @@ jobs:
         run: |
           lake build
           lake env lean ProofAuditBackward.lean
+          lake env lean ProofAuditCrossing.lean
   certificate:
     name: Reject proof gaps and unapproved axioms
     runs-on: ubuntu-latest
