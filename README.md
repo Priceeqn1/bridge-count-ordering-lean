@@ -2,7 +2,7 @@
 
 Goal: a Lean-checked proof of the new common-time theorem in Hardisty, *Jump-count ordering beyond total positivity in weighted increasing paths*, AAM working draft v1.5 (14 November 2026).
 
-**Current status (15 November 2026): ONE THEOREM CERTIFIED, FIVE TARGETS OPEN.** The full positive-column backward time–state minor theorem `CommonTime.backward_time_state_minor_positive` now has a complete Lean 4 proof (the Fable-derived auxiliary proof is in `CommonTime/BackwardMinor.lean`). The pinned mathlib build passed, and `#print axioms` reports exactly `[propext, Classical.choice, Quot.sound]` for this theorem, with **no `sorryAx`**. See [successful build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43676293326). Five further theorems remain `sorry`; the **main count-array theorem is not yet certified**. The project-wide proof-gap job intentionally remains red until those obligations are proved.
+**Current status (15 November 2026): TWO THEOREMS CERTIFIED, FOUR TARGETS OPEN.** Both backward time–state minor theorems, `CommonTime.backward_time_state_minor_positive` and `CommonTime.backward_time_state_minor_full`, have complete Lean 4 proofs via the Fable-derived generalized induction in `CommonTime/BackwardMinor.lean`. The pinned mathlib build passed, and `#print axioms` reports exactly `[propext, Classical.choice, Quot.sound]` for this theorem, with **no `sorryAx`**. See [successful build and axiom audit](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43677296331). Four further theorems remain `sorry`; the **main count-array theorem is not yet certified**. The project-wide proof-gap job intentionally remains red until those four obligations are proved.
 
 ## Why this encoding
 
@@ -28,8 +28,8 @@ For an intermediate check independent of Lean: `python3 scripts/independent_poly
 
 - Proposed algebraic core: `CommonTime/Algebra.lean` (`ring` proof; not typechecked here).
 - Formal path and count array specification: `CommonTime/Definitions.lean` (not typechecked here).
-- **Proved:** positive-column backward time–state minor: `CommonTime/BackwardMinor.lean` and `CommonTime/Targets.lean` (no `sorry` in this theorem; axiom-audited).
-- **Still open:** full-column backward minor, crossing-time minor, prefix-count theorem, suffix-count theorem, and log-concavity: `CommonTime/Targets.lean` (five explicit `sorry` placeholders).
+- **Proved:** both positive-column and full-column backward time–state minors: `CommonTime/BackwardMinor.lean` and `CommonTime/Targets.lean` (no `sorry` in this theorem; axiom-audited).
+- **Still open:** crossing-time minor, prefix-count theorem, suffix-count theorem, and log-concavity: `CommonTime/Targets.lean` (four explicit `sorry` placeholders).
 - The two h variants and E lemma are explicit targets; proof bodies remain open.
 
-GitHub Actions has a passing **Lean build + focused backward-minor axiom audit**, but a failing **whole-project completion** job because five other proofs are unfinished. This is intentional; a green build alone does not certify all manuscript claims.
+GitHub Actions has a passing **Lean build + focused backward-minor axiom audit**, but a failing **whole-project completion** job because four other proofs are unfinished. This is intentional; a green build alone does not certify all manuscript claims.
