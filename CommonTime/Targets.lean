@@ -1,5 +1,6 @@
 import CommonTime.Definitions
 import CommonTime.Algebra
+import CommonTime.BackwardMinor
 
 /-!
 # Formalization targets for Version 1.5
@@ -33,7 +34,7 @@ theorem backward_time_state_minor_positive
     CoeffNonneg
       (backwardWeight k t K z' * backwardWeight k t' K z -
        backwardWeight k t K z * backwardWeight k t' K z') := by
-  sorry
+  exact backward_minor_aux htri hpos hK t t' htt' z z' hz0 hzz'
 
 /-- Manuscript Lemma 3.8 under full TP2, now also permitting z=0. -/
 theorem backward_time_state_minor_full
