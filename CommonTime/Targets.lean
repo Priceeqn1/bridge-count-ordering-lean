@@ -9,8 +9,9 @@ import CommonTime.LogConcavity
 # Formalization targets for Version 1.5
 
 IMPORTANT: the two backward minor theorems, the crossing-time minor theorem,
-and the prefix-count TP2 theorem are now proved and Lean kernel-checked.
-Two subsequent `sorry` placeholders mark UNPROVED targets.
+the prefix-count TP2 theorem, and jump-count log-concavity are now proved
+and Lean kernel-checked.
+One `sorry` placeholder marks the remaining UNPROVED suffix-count target.
 The full two-sided count-array theorem is NOT yet certified.
 The repository's `certificate` CI job intentionally rejects these.
 

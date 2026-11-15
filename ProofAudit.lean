@@ -5,7 +5,8 @@ import CommonTime
       lake env lean ProofAudit.lean
 
   Both backward minor theorems, the crossing-time theorem, and the
-  prefix-count theorem are proved (no `sorryAx`); two targets remain open.
+  prefix-count theorem and jump-count log-concavity are proved (no `sorryAx`);
+  the suffix-count theorem is the sole remaining open target.
   Once proved, the expected remaining axioms are the Lean/mathlib foundations
   (typically `propext`, `Classical.choice`, and `Quot.sound`).
 -/
