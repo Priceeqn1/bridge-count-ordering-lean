@@ -15,6 +15,7 @@ Lean 4 formalization companion to Hardisty, *Jump-count ordering beyond total po
 - `MvPolynomial (Fin (k+1)) ℝ` represents the independent activity variables and exact coefficientwise positivity, not numerical substitution.
 - Paths are finite strictly increasing vertex sequences, starting at 0 and ending at an arbitrary finite endpoint.
 - Full and positive-column TP₂ hypotheses are separate. The prefix theorem puts no TP₂ restriction on column zero.
+- The kernel-checked crossing-time lemma holds also for the boundary cut `q = 0`; it needs only `q < z.val` and has no `q ≥ 1` hypothesis. For the manuscript's internal cuts `1 ≤ q < k`, this is the same result with a slightly stronger Lean statement.
 - All completed results quantify over arbitrary finite endpoints rather than testing a fixed `k`.
 
 ## Main project files
