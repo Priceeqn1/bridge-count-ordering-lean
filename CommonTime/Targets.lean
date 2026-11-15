@@ -58,7 +58,6 @@ theorem crossing_time_minor
     (htri : StrictLowerTriangular K)
     (hpos : PositiveAdmissible K)
     (hK : PositiveColumnTP2 K)
-    (hq0 : 1 ≤ q)
     (hrr' : rho < rho') (hr't : rho' < theta)
     (z z' : Vertex k) (hqz : q < z.val) (hzz' : z < z') :
     CoeffNonneg
