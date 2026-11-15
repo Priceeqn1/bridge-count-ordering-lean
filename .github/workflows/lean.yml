@@ -20,7 +20,9 @@ jobs:
           lake update
           lake exe cache get
       - name: Typecheck
-        run: lake build
+        run: |
+          lake build
+          lake env lean ProofAuditBackward.lean
   certificate:
     name: Reject proof gaps and unapproved axioms
     runs-on: ubuntu-latest
