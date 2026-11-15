@@ -48,7 +48,7 @@ theorem backward_time_state_minor_full
     CoeffNonneg
       (backwardWeight k t K z' * backwardWeight k t' K z -
        backwardWeight k t K z * backwardWeight k t' K z') := by
-  sorry
+  exact backward_minor_aux_full htri hpos hK t t' htt' z z' hzz'
 
 /-- Manuscript Lemma 3.9: reverse-sign first-crossing minors.
     This is the E^theta_rho polynomial statement; not a numeric test. -/
