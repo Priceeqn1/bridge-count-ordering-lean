@@ -4,6 +4,7 @@ import CommonTime.BackwardMinor
 import CommonTime.Crossing
 import CommonTime.Prefix
 import CommonTime.LogConcavity
+import CommonTime.Suffix
 import CommonTime.Targets
 
 /-!

@@ -4,6 +4,7 @@ import CommonTime.BackwardMinor
 import CommonTime.Crossing
 import CommonTime.Prefix
 import CommonTime.LogConcavity
+import CommonTime.Suffix
 
 /-!
 # Formalization targets for Version 1.5
@@ -96,7 +97,8 @@ theorem suffix_count_array_TP2
     CoeffNonneg (minor
       (suffixArray k q r s K) (suffixArray k q r s' K)
       (suffixArray k q r' s K) (suffixArray k q r' s' K)) := by
-  sorry
+  unfold minor
+  exact suffix_count_aux htri hpos hK q hq0 hqk r r' s s' hr hs
 
 /-- Coefficientwise log-concavity of the jump-count weights. -/
 theorem jump_count_logconcavity

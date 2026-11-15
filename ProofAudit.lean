@@ -4,9 +4,8 @@ import CommonTime
   Kernel dependency audit. Run with:
       lake env lean ProofAudit.lean
 
-  Both backward minor theorems, the crossing-time theorem, and the
-  prefix-count theorem and jump-count log-concavity are proved (no `sorryAx`);
-  the suffix-count theorem is the sole remaining open target.
+  All six theorem targets have proof bodies. The expected axiom audit
+  should have no `sorryAx`. Full repository certificate is pending.
   Once proved, the expected remaining axioms are the Lean/mathlib foundations
   (typically `propext`, `Classical.choice`, and `Quot.sound`).
 -/
