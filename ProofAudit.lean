@@ -4,8 +4,8 @@ import CommonTime
   Kernel dependency audit. Run with:
       lake env lean ProofAudit.lean
 
-  The positive-column backward theorem is proved (no `sorryAx`); the
-  five remaining targets are unfinished and still involve `sorryAx`.
+  Both backward minor theorems are proved (no `sorryAx`); the
+  four remaining targets are unfinished and still involve `sorryAx`.
   Once proved, the expected remaining axioms are the Lean/mathlib foundations
   (typically `propext`, `Classical.choice`, and `Quot.sound`).
 -/
