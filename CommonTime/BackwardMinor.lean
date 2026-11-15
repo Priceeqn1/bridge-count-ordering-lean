@@ -1,16 +1,17 @@
 import CommonTime.Definitions
 
 /-!
-# Backward time/state minors (manuscript Lemma 3.8, positive-column form)
+# Backward time/state minors (manuscript Lemma 3.8, both forms)
 
 This file proves the reverse-sign minor inequality for the backward
 polynomials `h_t(z) = (T^t)(k,z)`:
 
   `h_t(z') * h_{t'}(z) - h_t(z) * h_{t'}(z') ⪰ 0` coefficientwise,
-  for `1 ≤ z < z'` and `t < t'`,
+  for `z < z'` and `t < t'`,
 
-under strict lower-triangularity, positivity on admissible edges, and
-positive-column TP2 of the kernel.
+under strict lower-triangularity and positivity on admissible edges, with
+either positive-column TP2 of the kernel (then `1 ≤ z` is required) or
+full TP2 (then `z = 0` is allowed).
 
 Structure:
 1. closure of `CoeffNonneg` under `0`, `1`, `C r` (`0 ≤ r`), `X j`, `+`,
@@ -183,17 +184,26 @@ theorem cauchy_binet_doubled {ι R : Type*} [Fintype ι] [CommRing R]
     ← Finset.mul_sum, ← Finset.sum_mul]
   ring
 
-/-! ## 4. The induction -/
+/-! ## 4. The induction
+
+The induction is run once, for a column predicate `P` that is closed upward
+(`P y → y < u → P u`) and on which the kernel's ordered `2 × 2` minors are
+nonnegative. Taking `P y := 0 < y.val` gives the positive-column statement;
+taking `P := fun _ => True` gives the full-TP2 statement, including `z = 0`.
+-/
 
 /-- A single ordered term of the Cauchy--Binet expansion is coefficientwise
     nonnegative, given the inductive hypothesis at times `t < s`. -/
 theorem backward_term_nonneg {K : Vertex k → Vertex k → ℝ}
-    (htri : StrictLowerTriangular K) (hK : PositiveColumnTP2 K)
+    (htri : StrictLowerTriangular K)
+    (P : Vertex k → Prop) (hP : ∀ y u : Vertex k, P y → y < u → P u)
+    (hK : ∀ u v i j : Vertex k, u < v → i < j → P i →
+      0 ≤ K u i * K v j - K u j * K v i)
     (t s : ℕ)
-    (ih : ∀ y y' : Vertex k, 0 < y.val → y < y' →
+    (ih : ∀ y y' : Vertex k, P y → y < y' →
       CoeffNonneg (backwardWeight k t K y' * backwardWeight k s K y -
         backwardWeight k t K y * backwardWeight k s K y'))
-    (z z' : Vertex k) (hz0 : 0 < z.val) (hzz' : z < z')
+    (z z' : Vertex k) (hz : P z) (hzz' : z < z')
     (u v : Vertex k) (huv : u < v) :
     CoeffNonneg
       ((backwardWeight k t K u * backwardWeight k s K v
@@ -208,10 +218,8 @@ theorem backward_term_nonneg {K : Vertex k → Vertex k → ℝ}
     rw [h1, h2, zero_mul, mul_zero, sub_zero, mul_zero]
     exact coeffNonneg_zero
   · -- `z < u < v`: inductive hypothesis at columns `(u,v)`, kernel minor at `(z,z')`.
-    have hzu' : z.val < u.val := hzu
-    have hu0 : 0 < u.val := lt_trans hz0 hzu'
-    have hN := ih u v hu0 huv
-    have hm : 0 ≤ K u z * K v z' - K u z' * K v z := hK u v z z' huv hzz' hz0
+    have hN := ih u v (hP z u hz hzu) huv
+    have hm : 0 ≤ K u z * K v z' - K u z' * K v z := hK u v z z' huv hzz' hz
     have key :
         (backwardWeight k t K u * backwardWeight k s K v
             - backwardWeight k t K v * backwardWeight k s K u)
@@ -228,11 +236,15 @@ theorem backward_term_nonneg {K : Vertex k → Vertex k → ℝ}
       (coeffNonneg_mul (coeffNonneg_C hm)
         (coeffNonneg_mul (coeffNonneg_activity z) (coeffNonneg_activity z')))
 
-/-- Induction form of manuscript Lemma 3.8 (positive-column hypothesis). -/
-theorem backward_minor_aux {K : Vertex k → Vertex k → ℝ}
+/-- General induction form of manuscript Lemma 3.8, for an upward-closed
+    column predicate `P` on which the kernel minors are nonnegative. -/
+theorem backward_minor_general {K : Vertex k → Vertex k → ℝ}
     (htri : StrictLowerTriangular K) (hpos : PositiveAdmissible K)
-    (hK : PositiveColumnTP2 K) (t : ℕ) :
-    ∀ t' : ℕ, t < t' → ∀ z z' : Vertex k, 0 < z.val → z < z' →
+    (P : Vertex k → Prop) (hP : ∀ y u : Vertex k, P y → y < u → P u)
+    (hK : ∀ u v i j : Vertex k, u < v → i < j → P i →
+      0 ≤ K u i * K v j - K u j * K v i)
+    (t : ℕ) :
+    ∀ t' : ℕ, t < t' → ∀ z z' : Vertex k, P z → z < z' →
       CoeffNonneg
         (backwardWeight k t K z' * backwardWeight k t' K z -
          backwardWeight k t K z * backwardWeight k t' K z') := by
@@ -243,7 +255,7 @@ theorem backward_minor_aux {K : Vertex k → Vertex k → ℝ}
     exact coeffNonneg_mul (coeffNonneg_backwardWeight htri hpos 0 z')
       (coeffNonneg_backwardWeight htri hpos t' z)
   | succ t ih =>
-    intro t' htt' z z' hz0 hzz'
+    intro t' htt' z z' hz hzz'
     obtain ⟨s, rfl⟩ : ∃ s, t' = s + 1 := ⟨t' - 1, by omega⟩
     have hts : t < s := by omega
     have ih' := ih s hts
@@ -259,11 +271,11 @@ theorem backward_minor_aux {K : Vertex k → Vertex k → ℝ}
     apply coeffNonneg_sum
     intro w' _
     rcases lt_trichotomy w w' with hlt | heq | hgt
-    · exact backward_term_nonneg htri hK t s ih' z z' hz0 hzz' w w' hlt
+    · exact backward_term_nonneg htri P hP hK t s ih' z z' hz hzz' w w' hlt
     · subst heq
       rw [sub_self, zero_mul]
       exact coeffNonneg_zero
-    · have hterm := backward_term_nonneg htri hK t s ih' z z' hz0 hzz' w' w hgt
+    · have hterm := backward_term_nonneg htri P hP hK t s ih' z z' hz hzz' w' w hgt
       have e :
           (backwardWeight k t K w * backwardWeight k s K w'
               - backwardWeight k t K w' * backwardWeight k s K w)
@@ -276,5 +288,29 @@ theorem backward_minor_aux {K : Vertex k → Vertex k → ℝ}
         ring
       rw [e]
       exact hterm
+
+/-- Manuscript Lemma 3.8 under positive-column TP2: columns `1 ≤ z < z'`. -/
+theorem backward_minor_aux {K : Vertex k → Vertex k → ℝ}
+    (htri : StrictLowerTriangular K) (hpos : PositiveAdmissible K)
+    (hK : PositiveColumnTP2 K) (t : ℕ) :
+    ∀ t' : ℕ, t < t' → ∀ z z' : Vertex k, 0 < z.val → z < z' →
+      CoeffNonneg
+        (backwardWeight k t K z' * backwardWeight k t' K z -
+         backwardWeight k t K z * backwardWeight k t' K z') :=
+  backward_minor_general htri hpos (fun y => 0 < y.val)
+    (fun _ _ hy hyu => lt_trans hy hyu) hK t
+
+/-- Manuscript Lemma 3.8 under full TP2: all columns `z < z'`, including `z = 0`. -/
+theorem backward_minor_aux_full {K : Vertex k → Vertex k → ℝ}
+    (htri : StrictLowerTriangular K) (hpos : PositiveAdmissible K)
+    (hK : FullTP2 K) (t : ℕ) :
+    ∀ t' : ℕ, t < t' → ∀ z z' : Vertex k, z < z' →
+      CoeffNonneg
+        (backwardWeight k t K z' * backwardWeight k t' K z -
+         backwardWeight k t K z * backwardWeight k t' K z') :=
+  fun t' htt' z z' hzz' =>
+    backward_minor_general htri hpos (fun _ => True)
+      (fun _ _ _ _ => trivial)
+      (fun u v i j huv hij _ => hK u v i j huv hij) t t' htt' z z' trivial hzz'
 
 end CommonTime
