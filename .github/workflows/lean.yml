@@ -1,0 +1,30 @@
+name: Lean proof validation (fails until proofs are complete)
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    name: Build the Lean project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch mathlib dependencies and cache
+        run: |
+          lake update
+          lake exe cache get
+      - name: Typecheck
+        run: lake build
+  certificate:
+    name: Reject proof gaps and unapproved axioms
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect unfinished declarations
+        run: python3 scripts/check_no_gaps.py
