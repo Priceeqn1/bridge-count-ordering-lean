@@ -6,7 +6,7 @@
 - **Merge commit on `main`:** `f52e1cfc0454bdfe421995da6aa803fd65e6b85f`.
 - **Source integrity:** The merge commit has the **same Git tree SHA** as the verified PR commit, `6552f243a51c9ab3910feab14a8e9426b73428fd`. No proof source changed during merging.
 - **Passing build and axiom audit:** [GitHub Actions run 44678555412](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/44678555412). The build reported `Build completed successfully (9068 jobs)`, and the last `#print axioms` reported `'CommonTime.theorem_4_7' depends on axioms: [propext, Classical.choice, Quot.sound]`, with **no `sorryAx`**.
-- **Post-merge `main` verification:** [Actions run 44682196989](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/44682196989). Consult GitHub for its final status; the identical source tree was previously verified.
+- **Successful post-merge `main` verification:** [Actions run 44682196989](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/44682196989) passed the complete Lean build (9068 jobs), the focused axiom audits, and the proof-gap check. The final theorem again depended only on `[propext, Classical.choice, Quot.sound]`.
 - **Fidelity audit:** [Review recorded on PR #1](https://github.com/Priceeqn1/bridge-count-ordering-lean/pull/1#issuecomment-7031387629). The final theorem statement was compared with Section 4.3 / Theorem 4.7 of the 17 November 2026 AAM manuscript v1.6 and no material statement mismatch was found.
 
 ## Source provenance
