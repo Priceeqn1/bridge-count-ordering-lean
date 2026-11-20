@@ -6,7 +6,7 @@ Formal verification companion to Hardisty, *Jump-count ordering beyond total pos
 
 - [Merged pull request #1 (Theorem 4.7)](https://github.com/Priceeqn1/bridge-count-ordering-lean/pull/1), merged 20 November 2026 into `main`.
 - [Successful Theorem 4.7 build and all focused axiom audits](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/44678555412), run on the exact source tree subsequently merged.
-- [Post-merge CI workflow on `main`](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/44682196989).
+- [Successful post-merge CI workflow on `main`](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/44682196989): complete Lean build, focused axiom audits, and proof-gap check passed.
 - [Earlier six-target certification workflow](https://github.com/Priceeqn1/bridge-count-ordering-lean/actions/runs/43680554382).
 
 ## Certified mathematical results
