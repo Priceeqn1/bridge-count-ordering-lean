@@ -28,6 +28,13 @@ jobs:
           lake env lean ProofAuditLogConcavity.lean
           lake env lean ProofAuditSuffix.lean
           lake env lean ProofAudit.lean
+          lake env lean ProofAuditTheorem47Chain.lean
+          lake env lean ProofAuditTheorem47ChainEnum.lean
+          lake env lean ProofAuditTheorem47Bonds.lean
+          lake env lean ProofAuditTheorem47Normalize.lean
+          lake env lean ProofAuditTheorem47Prefix.lean
+          lake env lean ProofAuditTheorem47Suffix.lean
+          lake env lean ProofAuditTheorem47.lean
   certificate:
     name: Reject proof gaps and unapproved axioms
     runs-on: ubuntu-latest
