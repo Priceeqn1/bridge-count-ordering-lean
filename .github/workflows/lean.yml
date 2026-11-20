@@ -19,22 +19,29 @@ jobs:
         run: |
           lake update
           lake exe cache get
-      - name: Typecheck
+      - name: Typecheck and audit axioms
         run: |
+          set -o pipefail
           lake build
-          lake env lean ProofAuditBackward.lean
-          lake env lean ProofAuditCrossing.lean
-          lake env lean ProofAuditPrefix.lean
-          lake env lean ProofAuditLogConcavity.lean
-          lake env lean ProofAuditSuffix.lean
-          lake env lean ProofAudit.lean
-          lake env lean ProofAuditTheorem47Chain.lean
-          lake env lean ProofAuditTheorem47ChainEnum.lean
-          lake env lean ProofAuditTheorem47Bonds.lean
-          lake env lean ProofAuditTheorem47Normalize.lean
-          lake env lean ProofAuditTheorem47Prefix.lean
-          lake env lean ProofAuditTheorem47Suffix.lean
-          lake env lean ProofAuditTheorem47.lean
+          {
+            lake env lean ProofAuditBackward.lean
+            lake env lean ProofAuditCrossing.lean
+            lake env lean ProofAuditPrefix.lean
+            lake env lean ProofAuditLogConcavity.lean
+            lake env lean ProofAuditSuffix.lean
+            lake env lean ProofAudit.lean
+            lake env lean ProofAuditTheorem47Chain.lean
+            lake env lean ProofAuditTheorem47ChainEnum.lean
+            lake env lean ProofAuditTheorem47Bonds.lean
+            lake env lean ProofAuditTheorem47Normalize.lean
+            lake env lean ProofAuditTheorem47Prefix.lean
+            lake env lean ProofAuditTheorem47Suffix.lean
+            lake env lean ProofAuditTheorem47.lean
+          } | tee lean-axioms.log
+          if grep -nF 'sorryAx' lean-axioms.log; then
+            echo "::error::The Lean axiom audit reported sorryAx."
+            exit 1
+          fi
   certificate:
     name: Reject proof gaps and unapproved axioms
     runs-on: ubuntu-latest

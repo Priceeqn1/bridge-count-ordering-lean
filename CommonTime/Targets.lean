@@ -7,14 +7,16 @@ import CommonTime.LogConcavity
 import CommonTime.Suffix
 
 /-!
-# Formalization targets for Version 1.5
+# General TP₂ formalization targets (AAM manuscript v1.6)
 
-IMPORTANT: the two backward minor theorems, the crossing-time minor theorem,
-the prefix-count TP2 theorem, and jump-count log-concavity are now proved
-and Lean kernel-checked.
-One `sorry` placeholder marks the remaining UNPROVED suffix-count target.
-The full two-sided count-array theorem is NOT yet certified.
-The repository's `certificate` CI job intentionally rejects these.
+All six declarations in this module have been proved and Lean kernel-checked:
+the two backward time–state minor theorems, the first-crossing minor,
+coefficientwise prefix and suffix count-array TP₂, and jump-count
+log-concavity.
+
+The separate sharp Toeplitz separation theorem (Theorem 4.7) is in
+`CommonTime/Theorem47.lean`; its prefix/suffix results, necessity witness,
+and combined characterization were also kernel-checked and audited.
 
 Target order:
 1. coefficientwise Cauchy--Binet and elementary closure lemmas;
@@ -24,7 +26,8 @@ Target order:
 5. suffix joint-array theorem under full TP2;
 6. jump-count log-concavity.
 
-See FORMALIZATION_MAP.md for the exact corresponding paper equations.
+See FORMALIZATION_MAP.md for the original target correspondence and
+THEOREM47_INTEGRATION.md for the separate Toeplitz theorem certificate.
 -/
 
 namespace CommonTime
