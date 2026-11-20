@@ -1,49 +1,46 @@
-# Theorem 4.7 Lean integration — work in progress
+# Theorem 4.7 — Lean integration checkpoint
 
-**Branch:** `theorem47-integration-20261119` (staged separately from `main`).
+**Branch:** `theorem47-integration-20261119` (draft PR #1; `main` unchanged).
 
-The six earlier Lean theorem targets on `main` are the existing verified baseline.
-**Do not describe Theorem 4.7 as kernel-verified yet.** This branch is an integration staging area;
-a passed legacy workflow does not by itself certify the new theorem, and missing import files currently
-prevent a complete source build.
+## Source provenance and status
 
-## Exact Fable sources staged from conversation uploads
+All twelve source modules of the new Theorem 4.7 development are now staged on this branch, from Fable's supplied `bcol_theorem47_files.zip` (2026-11-19/20). The archive's `SHA256SUMS.txt` manifest was checked against its contents. Five modules previously staged from conversation uploads matched the ZIP sources modulo trailing final newline.
 
-- `CommonTime/Subsets.lean` — step kernel, paths ↔ vertex sets, prefix array.
-- `CommonTime/ChainEnum.lean` — enumeration ↔ abstract binary-chain recursion.
-- `CommonTime/Grouping.lean` — multiplicity fibres, prefix combinatorial core.
-- `CommonTime/Coefficient.lean` — polynomial coefficient transfer, prefix top-level theorem.
-- `CommonTime/SuffixCore.lean` — suffix counting, swapped chain inequality, suffix core.
+**This is NOT YET a kernel certificate.** A successful current-commit `lake build`, focused `#print axioms` audits, and manuscript/Lean fidelity review are required before merging or updating the paper's formal-verification remark.
 
-These are *source snapshots*, not independently certified Lean modules.
+## New Lean modules
 
-## Remaining dependencies and files
+- `CommonTime/Subsets.lean` — paths ↔ vertex sets and prefix-array representation
+- `CommonTime/Chain.lean` — abstract coupled-chain lemma and cut inequality
+- `CommonTime/ChainEnum.lean` — chain subset enumeration and recursion
+- `CommonTime/Bonds.lean` — bond factorization and chain-pair sums
+- `CommonTime/Normalize.lean` — normalization of path weights
+- `CommonTime/Grouping.lean` — multiplicity fibres and prefix core inequality
+- `CommonTime/Coefficient.lean` — coefficientwise prefix theorem
+- `CommonTime/SuffixCore.lean` — suffix chain and combinatorial inequality
+- `CommonTime/SuffixCoeff.lean` — coefficientwise suffix theorem
+- `CommonTime/Witness.lean` — explicit necessity witness
+- `CommonTime/ToeplitzTP2.lean` — TP₂ iff θ ≥ 1 and high-θ case
+- `CommonTime/Theorem47.lean` — the sharp combined theorem
 
-The modules above refer to additional sources not yet committed on this branch:
+`CommonTime.lean` imports all twelve, so `lake build` cannot silently skip their typechecking.
 
-- `CommonTime/Chain.lean`: the abstract coupled-chain inequalities, including `Zdiff_nonneg`.
-- `CommonTime/Bonds.lean`: bond decomposition, `baseCount`, `Zsum`, and `Zsum_eq_Zpair`.
-- `CommonTime/Normalize.lean`: `kernelFactor_eq` and `subWeight_pair` (source pasted in chat).
-- `CommonTime/SuffixCoeff.lean`: suffix polynomial bridge (source pasted in chat).
-- `CommonTime/Witness.lean`: coefficient `θ^2 (2θ-1)` for the sharpness witness (source pasted in chat).
-- `CommonTime/ToeplitzTP2.lean`: the `θ≥1` TP₂ regime (source pasted in chat).
-- `CommonTime/Theorem47.lean`: assembly of the sharp iff statements (source pasted in chat).
+## Reproduce
 
-The full `Chain.lean` and `Bonds.lean` files have **not** been provided in the accessible conversation.
-Those two files are necessary to complete the import chain.
+```bash
+lake build
+lake env lean ProofAuditTheorem47Chain.lean
+lake env lean ProofAuditTheorem47ChainEnum.lean
+lake env lean ProofAuditTheorem47Bonds.lean
+lake env lean ProofAuditTheorem47Normalize.lean
+lake env lean ProofAuditTheorem47Prefix.lean
+lake env lean ProofAuditTheorem47Suffix.lean
+lake env lean ProofAuditTheorem47.lean
+python3 scripts/check_no_gaps.py
+```
 
-## Verification order
+The CI workflow now runs these checks along with the six original audits. Final `CommonTime.theorem_4_7` must exclude `sorryAx`; ordinary `propext`, `Classical.choice` and `Quot.sound` are expected Lean foundations.
 
-1. Add the missing sources in their actual `CommonTime/*.lean` paths without modifying `main`.
-2. Run `lake env lean CommonTime/Subsets.lean`, then the chain/bond modules, followed by
-   `ChainEnum`, `Normalize`, `Grouping`, `Coefficient`, `SuffixCore`,
-   `SuffixCoeff`, `Witness`, `ToeplitzTP2`, and `Theorem47`.
-3. Run `lake build` and the existing six theorem audits to catch regressions.
-4. Run `lake env lean ProofAuditTheorem47.lean` and examine the resulting axiom list;
-   in particular, confirm `theorem_4_7` has **no `sorryAx`**.
-5. Run `python3 scripts/check_no_gaps.py`.
-6. Independently audit the final theorem against the manuscript: all endpoints/cuts/minors;
-   independent activity variables; prefix and suffix conventions; `k≥4` for part (a);
-   sharpness coefficient for part (b).
+## Statement-faithfulness review
 
-Only after those checks pass should the manuscript formal-verification remark be expanded.
+Confirm all endpoints, prefix/suffix cut conventions and indices; arbitrary activities and all ordered minors; the finite `k ≥ 4` restriction on kernel TP₂ sharpness; the coefficient of `a₁ a₃ a₄` at `k=5`; and the `θ > 0` / `θ ≥ 1/2` thresholds. Do not merge until CI is green and this comparison has been completed.
